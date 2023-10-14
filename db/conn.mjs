@@ -12,6 +12,6 @@ console.log("CONNECTED TO MONGODB")
 console.error(ex);
 }
 
-let db = conn.db("products_db");
+let db = conn.db("Marketplace");
 
 export default db;
