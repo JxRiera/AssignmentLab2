@@ -11,22 +11,13 @@ router.get('/', async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-    const result = await db.collection("product").findOne({ _id: ObjectId(req.params.id) });
+    const result = await db.collection("product").findOne({ _id: new ObjectId(req.params.id) });
     if (!result) {
         res.status(404).send("Product not found");
         return;
     }
     res.send(result).status(200);
- });
-
-router.get('?name=[kw]', async (req, res) => {
-    const result = await db.collection('product').find({name: req.query.name}).toArray();
-    if (!result) {
-        res.status(404).send('Product not found');
-        return;
-    }
-    res.send(result).status(200);
-});
+ }); 
 //End of GET methods
 
 //POST method
@@ -42,7 +33,7 @@ router.post('/', async (req, res) => {
 
 //PUT method
 router.put('/:id', async (req, res) => {
-    const result = await db.collection('product').updateOne({ _id: ObjectId(req.params.id) }, { $set: req.body });
+    const result = await db.collection('product').updateOne({ _id: new ObjectId(req.params.id) }, { $set: req.body });
     if (!result) {
         res.status(500).send('Update not successful');
         return;
@@ -52,7 +43,7 @@ router.put('/:id', async (req, res) => {
 
 //DELETE methods
 router.delete('/:id', async (req, res) => {
-    const result = await db.collection('product').deleteOne({ _id: ObjectId(req.params.id) });
+    const result = await db.collection('product').deleteOne({ _id: new ObjectId(req.params.id) });
     if (!result) {
         res.status(500).send('Delete not successful');
         return;
